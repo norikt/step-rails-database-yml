@@ -18,7 +18,7 @@ the specified service; otherwise, it will infer the service from the
 environment.
 - `postgresql-min-message` (optinal, default: `warning`): Set the min_messages
 parameter in the postgresql template.
-- `mysql-collation` (optinal, default: `utf8_general_ci`): Set collation 
+- `mysql-collation` (optinal, default: `utf8_general_ci`): Set collation
 parameter in mysql template.
 
 # Supported services
@@ -67,6 +67,10 @@ test:
 ```
 
 # Changelog
+
+## 1.2.0
+
+- Add `mysql-collation` parameter
 
 ## 1.1.0
 
