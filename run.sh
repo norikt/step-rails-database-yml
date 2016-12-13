@@ -11,6 +11,10 @@ main() {
     export WERCKER_RAILS_DATABASE_YML_POSTGRESQL_MIN_MESSAGE="warning"
   fi
 
+  if [ -z "$WERCKER_RAILS_DATABASE_YML_MYSQL_COLLATION" ]; then
+    export WERCKER_RAILS_DATABASE_YML_MYSQL_COLLATION="utf8_general_ci"
+  fi
+
   if [ -n "$WERCKER_RAILS_DATABASE_YML_SERVICE" ]; then
     info "Skipping autodetection; service option set: $WERCKER_RAILS_DATABASE_YML_SERVICE"
 
@@ -154,6 +158,7 @@ generate_mysql_docker() {
 test:
     adapter: mysql2
     encoding: utf8
+    collation: $WERCKER_RAILS_DATABASE_YML_MYSQL_COLLATION
     database: <%= ENV['MYSQL_ENV_MYSQL_DATABASE'] %><%= ENV['TEST_ENV_NUMBER'] %>
     username: <%= ENV['MYSQL_ENV_MYSQL_USER'] %>
     password: <%= ENV['MYSQL_ENV_MYSQL_PASSWORD'] %>
@@ -172,6 +177,7 @@ generate_mysql_legacy() {
 test:
     adapter: mysql2
     encoding: utf8
+    collation: $WERCKER_RAILS_DATABASE_YML_MYSQL_COLLATION
     database: <%= ENV['WERCKER_MYSQL_DATABASE'] %><%= ENV['TEST_ENV_NUMBER'] %>
     username: <%= ENV['WERCKER_MYSQL_USERNAME'] %>
     password: <%= ENV['WERCKER_MYSQL_PASSWORD'] %>
